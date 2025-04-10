@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <section>
+        <h2>Create New Job Posting</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="title">Job Title</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Job Description</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="requirements">Requirements</label>
+                <textarea id="requirements" name="requirements" required></textarea>
+            </div>
+            <button type="submit">Create Job</button>
+        </form>
+    </section>
+    
+    <section>
+        <h2>Existing Jobs</h2>
+        <ul>
+            {% for job in jobs %}
+            <li>
+                <a href="{{ url_for('main.job_details', job_id=job.id) }}">{{ job.title }}</a>
+                <span>Created on {{ job.created_at.strftime('%Y-%m-%d') }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}
